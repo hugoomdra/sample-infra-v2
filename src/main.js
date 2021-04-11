@@ -10,12 +10,17 @@ const port = 8000;
 const ACCESS_TOKEN_SECRET = "123456789";
 const ACCESS_TOKEN_LIFE = 120;
 
+const consigne = [
+    "Je suis un serveur qui parle",
+    "Super encore un message",
+    "STOP"
+]
 
 function login(data,res) {
     var Validator = require('jsonschema').Validator;
     var v = new Validator();
     validation = v.validate(data, schemas.loginSchema);
-    console.log(validation);
+    console.log("validation", validation);
     if (validation.valid){
         if (data.username == "test" && data.password == "pass") {
             let j = jwt.sign({"username":data.username}, ACCESS_TOKEN_SECRET, {
@@ -38,6 +43,35 @@ function login(data,res) {
         // Send back reply content
         res.end(JSON.stringify({"error":-2,"message":"json erreur attention"}));
     }
+
+}
+
+
+function pull(data,res) {
+    console.log("Route Pull", data);
+    // Check JWT validity
+    jwt.verify(data.jwt, ACCESS_TOKEN_SECRET, function(err, decoded) {
+        if (err) { // There is an error: invalid jwt ...
+            res.writeHead(401, {'Content-Type': 'application/json'});
+            // Send back reply content
+        } else {
+            // Ok no problem: Adding data
+            res.writeHead(201, {'Content-Type': 'application/json'});
+            res.write(JSON.stringify({"test": "test"}))
+
+            let compteur = 0;
+            setInterval(() => {
+
+                if(consigne[compteur] == "STOP"){
+                    res.end(JSON.stringify({"error":0,"message":"Fin de connexion"}));
+                }else{
+                    res.write(JSON.stringify({"message": consigne[compteur]}))
+                }
+                compteur++;
+
+            }, 3000)
+        }
+    });
 
 }
 
@@ -86,10 +120,19 @@ function run() {
         login(body,res);
     });
 
+    app.post('/pull', (req, res) => {
+        var body = req.body;
+        console.log("POST 404", req.originalUrl);
+        pull(body,res);
+    });
+
     app.get('/*', (req, res) => {
         console.log("GET 404", req.originalUrl);
         f404(null,res);
     });
+
+
+
     app.post('/*', (req, res) => {
         console.log("POST 404",req.originalUrl);
         f404(null,res);
