@@ -1,11 +1,18 @@
-# sample-infra
+<p align="center"><img src="readme/images/eseo_logo.png" width="400"></p>
 
-This project is an academic support for my "Infrastructure de l'IoT
-(ESEO)" class. It should not be used in production. License is GPLv3.
-The rest of the document is in French...
+# TP3 - Plateforme IOT
+> *Dernière mise à jour le 11 avril 2021*
+
+Dans le cadre de la matière *Plateforme IOT* de mon cursus Ingénieur (Semestre 8), j'ai du rendre le TP en suivant cet **[énoncé](sujet/tp3.pdf)**.
+
+Vous pouvez me contacter sur **[LinkedIn](https://www.linkedin.com/in/hugo-madureira/)** si vous avez des questions.
 
 
-## Quelques éléments pour commencer
+Tous ce qui se trouve après le séparateur en dessous correspond au readme initial du projet.
+
+---
+
+# Quelques éléments pour commencer
 
 ## Documentations
 

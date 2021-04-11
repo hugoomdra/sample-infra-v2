@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "test": "echo \"Test target\"",
-      "server": "node bin/server.js",
-      "curl": "curl -d '{\"username\":\"test\",\"password\":\"pass\"}' http://localhost:8000/login",
-      "client": "node bin/client.js"
- },
+    "test": "echo \"Test target\"",
+    "server": "node bin/server.js",
+    "curl": "curl -d '{\"username\":\"test\",\"password\":\"pass\"}' http://localhost:8000/login",
+    "client": "node bin/client.js"
+  },
   "author": "",
   "license": "GPLv3",
   "dependencies": {

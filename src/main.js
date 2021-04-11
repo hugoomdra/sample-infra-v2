@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const schemas = require('./schema');
 
 const app = express();
 const host = 'localhost'; // Utiliser 0.0.0.0 pour être visible depuis l'exterieur de la machine
@@ -10,26 +11,34 @@ const ACCESS_TOKEN_SECRET = "123456789";
 const ACCESS_TOKEN_LIFE = 120;
 
 
-
 function login(data,res) {
-    console.log("login");
-    console.log('Username:',data.username,'Passwd:',data.password);
-
-    if (data.username == "test" && data.password == "pass") {
-        let j = jwt.sign({"username":data.username}, ACCESS_TOKEN_SECRET, {
-            algorithm: "HS512",
-            expiresIn: ACCESS_TOKEN_LIFE
-        });
-        // Reply to client as error code 200 (no error in HTTP); Reply data format is json
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        // Send back reply content
-        res.end(JSON.stringify({"error":0,"message":j}));
-    } else {
+    var Validator = require('jsonschema').Validator;
+    var v = new Validator();
+    validation = v.validate(data, schemas.loginSchema);
+    console.log(validation);
+    if (validation.valid){
+        if (data.username == "test" && data.password == "pass") {
+            let j = jwt.sign({"username":data.username}, ACCESS_TOKEN_SECRET, {
+                algorithm: "HS512",
+                expiresIn: ACCESS_TOKEN_LIFE
+            });
+            // Reply to client as error code 200 (no error in HTTP); Reply data format is json
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            // Send back reply content
+            res.end(JSON.stringify({"error":0,"message":j}));
+        } else {
+            // Reply to client as error code 200 (no error in HTTP); Reply data format is json
+            res.writeHead(401, {'Content-Type': 'application/json'});
+            // Send back reply content
+            res.end(JSON.stringify({"error":-1,"message":"login error"}));
+        }
+    }else{
         // Reply to client as error code 200 (no error in HTTP); Reply data format is json
         res.writeHead(401, {'Content-Type': 'application/json'});
         // Send back reply content
-        res.end(JSON.stringify({"error":-1,"message":"login error"}));
+        res.end(JSON.stringify({"error":-2,"message":"json erreur attention"}));
     }
+
 }
 
 function postdata(data,res) {

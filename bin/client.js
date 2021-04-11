@@ -3,9 +3,9 @@ const https = require('http');
 
 
 /**
-   Function POST: post the data "jdata" to the url "url".
-   "f" is the callback when it's finished
-*/
+ Function POST: post the data "jdata" to the url "url".
+ "f" is the callback when it's finished
+ */
 function POST(jdata,url,f) {
 
     const data = JSON.stringify(jdata);
@@ -41,8 +41,8 @@ function POST(jdata,url,f) {
 console.log(process.argv);
 
 // Setting default value
-let login = "test";
-let password = "pass";
+let login = 1;
+let password = 2;
 // If some parameters are there, use them...
 if (process.argv.length > 3) {
     login = process.argv[2];
@@ -51,7 +51,7 @@ if (process.argv.length > 3) {
 
 /* Doing POST ... Imbricate them*/
 POST({username: login,password: password},"/login",d => {
-    console.log(d);
+    console.log("test", d);
     POST({jwt:d.message,data:'ok'},"/pushdata",d => {
         console.log(d);
     });
