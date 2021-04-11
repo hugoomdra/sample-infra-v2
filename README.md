@@ -7,8 +7,14 @@ Dans le cadre de la matière *Plateforme IOT* de mon cursus Ingénieur (Semestre
 
 Vous pouvez me contacter sur **[LinkedIn](https://www.linkedin.com/in/hugo-madureira/)** si vous avez des questions.
 
+## Citère à remplir
 
-Tous ce qui se trouve après le séparateur en dessous correspond au readme initial du projet.
+- Installer npm jsonschema
+- Vérifier les données json d'entrée à l'aide d'un schéma JSON
+- Réaliser un mécanisme de Pulling
+
+
+> Tous ce qui se trouve après le séparateur en dessous correspond au readme initial du projet.
 
 ---
 
