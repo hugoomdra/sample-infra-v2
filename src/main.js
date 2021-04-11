@@ -10,7 +10,7 @@ const port = 8000;
 const ACCESS_TOKEN_SECRET = "123456789";
 const ACCESS_TOKEN_LIFE = 120;
 
-const consigne = [
+const consignes = [
     "Je suis un serveur qui parle",
     "Super encore un message",
     "STOP"
@@ -20,7 +20,6 @@ function login(data,res) {
     var Validator = require('jsonschema').Validator;
     var v = new Validator();
     validation = v.validate(data, schemas.loginSchema);
-    console.log("validation", validation);
     if (validation.valid){
         if (data.username == "test" && data.password == "pass") {
             let j = jwt.sign({"username":data.username}, ACCESS_TOKEN_SECRET, {
@@ -48,7 +47,6 @@ function login(data,res) {
 
 
 function pull(data,res) {
-    console.log("Route Pull", data);
     // Check JWT validity
     jwt.verify(data.jwt, ACCESS_TOKEN_SECRET, function(err, decoded) {
         if (err) { // There is an error: invalid jwt ...
@@ -62,21 +60,20 @@ function pull(data,res) {
             let compteur = 0;
             setInterval(() => {
 
-                if(consigne[compteur] == "STOP"){
+                if(consignes[compteur] == "STOP"){
                     res.end(JSON.stringify({"error":0,"message":"Fin de connexion"}));
                 }else{
-                    res.write(JSON.stringify({"message": consigne[compteur]}))
+                    res.write(JSON.stringify({"message": consignes[compteur]}))
                 }
                 compteur++;
 
-            }, 3000)
+            }, 30000)
         }
     });
 
 }
 
 function postdata(data,res) {
-    console.log("Post Data",data);
     // Check JWT validity
     jwt.verify(data.jwt, ACCESS_TOKEN_SECRET, function(err, decoded) {
         if (err) { // There is an error: invalid jwt ...
@@ -110,31 +107,26 @@ function run() {
 
     app.post('/pushdata', (req, res) => {
         var body = req.body;
-        console.log(body);
         postdata(body,res);
     });
 
     app.post("/login", (req, res) => {
         var body = req.body;
-        console.log(body);
         login(body,res);
     });
 
     app.post('/pull', (req, res) => {
         var body = req.body;
-        console.log("POST 404", req.originalUrl);
         pull(body,res);
     });
 
     app.get('/*', (req, res) => {
-        console.log("GET 404", req.originalUrl);
         f404(null,res);
     });
 
 
 
     app.post('/*', (req, res) => {
-        console.log("POST 404",req.originalUrl);
         f404(null,res);
     });
 

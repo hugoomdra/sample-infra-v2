@@ -22,7 +22,6 @@ function POST(jdata,url,f) {
     };
 
     const req = https.request(options, res => {
-        console.log(`statusCode: ${res.statusCode}`);
 
         res.on('data', (d) => {
             let jd = JSON.parse(d.toString('utf-8'));
@@ -38,7 +37,6 @@ function POST(jdata,url,f) {
     req.end();
 }
 
-console.log(process.argv);
 
 // Setting default value
 let login = 1;
@@ -51,7 +49,7 @@ if (process.argv.length > 3) {
 
 /* Doing POST ... Imbricate them*/
 POST({username: login,password: password},"/login",d => {
-    console.log("test", d);
+    console.log(d);
     POST({jwt:d.message,data:'ok'},"/pull",d => {
         console.log(d.message);
     });
