@@ -3,7 +3,7 @@
 # TP3 - Plateforme IOT
 > *Dernière mise à jour le 11 avril 2021*
 
-Dans le cadre de la matière *Plateforme IOT* de mon cursus Ingénieur (Semestre 8), j'ai du rendre le TP en suivant cet **[énoncé](sujet/tp3.pdf)**.
+Dans le cadre de la matière *Plateforme IOT* de mon cursus Ingénieur (Semestre 8), j'ai du rendre le TP en suivant cet **[énoncé](https://github.com/hugoomdra/sample-infra-v2/blob/master/sujet/TP3.pdf)**.
 
 Vous pouvez me contacter sur **[LinkedIn](https://www.linkedin.com/in/hugo-madureira/)** si vous avez des questions.
 
