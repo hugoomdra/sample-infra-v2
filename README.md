@@ -15,7 +15,7 @@ Vous pouvez me contacter sur **[LinkedIn](https://www.linkedin.com/in/hugo-madur
 
 ## Détails sur le Pulling
 
-Voici la variable qui comprends les consignes que le serveur donne aux clients qui se connectent sur la route ***/pull***
+Voici la variable qui comprends les consignes que le serveur donne aux clients qui se connectent sur la route ***/pushdata***
 
 `const consignes = [
 "Je suis un serveur qui parle",
@@ -23,22 +23,25 @@ Voici la variable qui comprends les consignes que le serveur donne aux clients q
 "STOP"
 ]`
 
-Le mot clef `STOP` permet d'indiquer aux serveurs de stopper la connexion avec le client.
+Le mot clef `STOP` permet d'indiquer aux serveurs de stopper la connexion avec le client. Une fois que le client retrouve le message `STOP` en réponse d'une requête, il va stoper la connexion avec le serveur.
 
 Les autres phrases sont des messages que le client affiche.
 
-Le code suivant permet de simuler un système de pulling, toute les 30sec, le serveur va envoyer au client
+Le code suivant permet de simuler un système de pulling, toute les 30sec, le client va envoyer une requête au serveur.
 ```js
-let compteur = 0;
-setInterval(() => {
+POST({username: login,password: password},"/login",d => {
+    console.log(d);
+    var interval = setInterval(() => {
+        POST({jwt:d.message,data:'ok'},"/pushdata",d => {
 
-    if(consignes[compteur] == "STOP"){
-        res.end(JSON.stringify({"error":0,"message":"Fin de connexion"}));
-    }else{
-        res.write(JSON.stringify({"message": consignes[compteur]}))
-    }
-    compteur++;
-    }, 30000)
+            if (d.message == "STOP"){
+                clearInterval(interval);
+            }else{
+                console.log(d.message);
+            }
+        });
+    }, 30000) 
+});
 ```
 
 ## Tester le programme
