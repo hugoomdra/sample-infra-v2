@@ -9,13 +9,13 @@ Vous pouvez me contacter sur **[LinkedIn](https://www.linkedin.com/in/hugo-madur
 
 ## Critère à remplir
 
-- Installer npm jsonschema
-- Vérifier les données json d'entrée à l'aide d'un schéma JSON
-- Réaliser un mécanisme de Pulling
+- ✔️ Installer npm jsonschema
+- ✔️ Vérifier les données json d'entrée à l'aide d'un schéma JSON
+- ✔️ Réaliser un mécanisme de Pulling
 
 ## Détails sur le Pulling
 
-Voici la variable qui comprends les consignes que le serveur donne aux clients qui se connectent sur la route ***/pushdata***
+La variable `consignes` comprends les consignes que le serveur donne aux clients qui se connectent sur la route ***/pushdata***
 
 `const consignes = [
 "Je suis un serveur qui parle",
