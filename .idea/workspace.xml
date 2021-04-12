@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6e5b41bf-f607-4e61-a229-b8884f13278d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,7 @@
       <updated>1618157802436</updated>
       <workItem from="1618157805035" duration="5500000" />
       <workItem from="1618170873725" duration="2046000" />
-      <workItem from="1618236810410" duration="2172000" />
+      <workItem from="1618236810410" duration="3295000" />
     </task>
     <servers />
   </component>
@@ -81,5 +81,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="725" y="324" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1618240121614">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="725" y="324" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1618240121614" />
   </component>
 </project>
