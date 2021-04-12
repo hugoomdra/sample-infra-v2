@@ -61,8 +61,7 @@ POST({username: login,password: password},"/login",d => {
                 console.log(d.message);
             }
         });
-    }, 3000)
-
+    }, 30000)
 
 
 });
