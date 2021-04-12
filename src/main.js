@@ -5,7 +5,7 @@ const schemas = require('./schema');
 
 const app = express();
 const host = 'localhost'; // Utiliser 0.0.0.0 pour être visible depuis l'exterieur de la machine
-const port = 8000;
+const port = process.env.PORT || 8000
 
 const ACCESS_TOKEN_SECRET = "123456789";
 const ACCESS_TOKEN_LIFE = 120;
