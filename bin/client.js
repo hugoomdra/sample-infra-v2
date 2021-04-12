@@ -50,7 +50,19 @@ if (process.argv.length > 3) {
 /* Doing POST ... Imbricate them*/
 POST({username: login,password: password},"/login",d => {
     console.log(d);
-    POST({jwt:d.message,data:'ok'},"/pull",d => {
-        console.log(d.message);
-    });
+
+    var interval = setInterval(() => {
+
+        POST({jwt:d.message,data:'ok'},"/pushdata",d => {
+
+            if (d.message == "STOP"){
+                clearInterval(interval);
+            }else{
+                console.log(d.message);
+            }
+        });
+    }, 3000)
+
+
+
 });

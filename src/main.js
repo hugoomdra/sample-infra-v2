@@ -14,11 +14,14 @@ const consignes = [
     "Je suis un serveur qui parle",
     "Super encore un message",
     "STOP"
-]
+];
+
+var compteur = 0;
 
 function login(data,res) {
     var Validator = require('jsonschema').Validator;
     var v = new Validator();
+    compteur = 0;
     validation = v.validate(data, schemas.loginSchema);
     if (validation.valid){
         if (data.username == "test" && data.password == "pass") {
@@ -45,45 +48,14 @@ function login(data,res) {
 
 }
 
-
-function pull(data,res) {
-    // Check JWT validity
-    jwt.verify(data.jwt, ACCESS_TOKEN_SECRET, function(err, decoded) {
-        if (err) { // There is an error: invalid jwt ...
-            res.writeHead(401, {'Content-Type': 'application/json'});
-            // Send back reply content
-        } else {
-            // Ok no problem: Adding data
-            res.writeHead(201, {'Content-Type': 'application/json'});
-            res.write(JSON.stringify({"test": "test"}))
-
-            let compteur = 0;
-            setInterval(() => {
-
-                if(consignes[compteur] == "STOP"){
-                    res.end(JSON.stringify({"error":0,"message":"Fin de connexion"}));
-                }else{
-                    res.write(JSON.stringify({"message": consignes[compteur]}))
-                }
-                compteur++;
-
-            }, 30000)
-        }
-    });
-
-}
-
 function postdata(data,res) {
     // Check JWT validity
     jwt.verify(data.jwt, ACCESS_TOKEN_SECRET, function(err, decoded) {
         if (err) { // There is an error: invalid jwt ...
-            res.writeHead(401, {'Content-Type': 'application/json'});
-            // Send back reply content
             res.end(JSON.stringify({"error":-1,"message":"JWT error"}));
         } else {
-            // Ok no problem: Adding data
-            res.writeHead(201, {'Content-Type': 'application/json'});
-            res.end(JSON.stringify({"error":0,"message":"data added"}));
+            res.send(JSON.stringify({"message": consignes[compteur]}))
+            compteur++;
         }
     });
 }
